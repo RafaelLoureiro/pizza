@@ -3,6 +3,7 @@ let modalQT = 1;
 const c = (el) => document.querySelector(el);//return item
 const cs = (el) => document.querySelectorAll(el);//return array
 
+//List Products//
 pizzaJson.map((item, index) => {
     let pizzaItem = c('.models .pizza-item').cloneNode(true);//trazendo a div(html) (takind tht (div in html))
     //add information in -pizzaitem-
@@ -29,7 +30,7 @@ pizzaJson.map((item, index) => {
             size.querySelector('span').innerHTML = pizzaJson[key].sizes[sizeIndex];
         });
 
-        c('pizzaInfo--qt').innerHTML = modalQT;
+        c('.pizzaInfo--qt').innerHTML = modalQT;
 
         c('.pizzaWindowArea').style.opacity = 0;//add animation tansition
         c('.pizzaWindowArea').style.display = 'flex';//add modal
@@ -38,3 +39,12 @@ pizzaJson.map((item, index) => {
 
     c('.pizza-area').append(pizzaItem);//add pizzas
 });
+
+//Events Modal
+function closeModal() {
+
+    c('.pizzaWindowArea').style.opacity = 0;
+
+    setTimeout(() => { c('.pizzaWindowArea').style.display = 'none'; }, 225);
+}
+cs('.pizzaInfo--cancelButton, .pizzaInfo--cancelMobileButton').forEach((item) => { item.addEventListener('click', closeModal); });
