@@ -74,21 +74,32 @@ cs('.pizzaInfo--size').forEach((size, sizeIndex) => {
 c(".pizzaInfo--addButton").addEventListener('click', () => {
     let size = parseInt(c('.pizzaInfo--size.selected').getAttribute('data-key'));
     console.log('Tamanho:' + size);
-
     let indentifire = pizzaJson[modalKey].id + '@' + size; //id size item
-
     let key = cart.findIndex((item) => item.indentifire == indentifire);
-
     if (key > -1) {
         cart[key].qt += modalQT;
     } else {
-
         cart.push({//select product
             indentifire,
             id: pizzaJson[modalKey].id,
             size,
             qt: modalQT
         })
+        updateCart();
         closeModal();
     }
 })
+
+//cart
+
+function updateCart() {
+    if (cart.length > 0) {
+        c('aside').classList.add('show');
+        for (let i in cart) {
+            let pizzaitem = pizzaJson.findIndex((item) => item.id == cart[i].id);
+            console.log(pizzaitem);
+        }
+    } else {
+        c('aside').classList.remove('show');
+    }
+}
